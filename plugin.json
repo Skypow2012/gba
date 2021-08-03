@@ -1,0 +1,11 @@
+{
+	"main": "index.html",
+	"logo": "logo.png",
+	"features": [
+		{
+		  "code": "gba",
+		  "explain": "Source code is from http://endrift.github.io/gbajs/, you can find gba image in http://www.vgmuseum.com/gba.htm, enjoy :3",
+			"cmds":["pokemon", "gba", "zj", "game"]
+		}
+	]
+}
