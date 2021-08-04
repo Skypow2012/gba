@@ -2,7 +2,7 @@ body {
 	background: url('bg.png') no-repeat top center, -webkit-linear-gradient(#765490 560px, #6A4883 620px, #433061 900px);
 	background: url('bg.png') no-repeat top center, -moz-linear-gradient(#765490 560px, #6A4883 620px, #433061 900px, #433061);
 	text-align: center;
-	margin: 0 0 15px;
+	margin: 0 0;
 	color: white;
 	font-family: 'Calibri', 'Verdana', sans-serif;
 	font-size: 15px;
@@ -13,46 +13,72 @@ button {
 	font-family: 'Calibri', 'Verdana', sans-serif;
 }
 
+#mapping {
+	position: absolute;
+	right: 0;
+	top: 0;
+	margin: auto;
+	text-align: center;
+	border-spacing: 1px 5px;
+}
+
+/* #mapping td:first-child {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	padding-right: 10px;
+	border-right: 1px solid rgba(96, 48, 96, 0.8);
+}
+#mapping td:last-child {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	border-left: 1px solid rgba(96, 48, 96, 0.8);
+}
+#controls button, #mapping td, #sound, #controls label {
+	background: transparent;
+	border: 0px solid rgba(192, 128, 192, 0.5);
+	border-top: 2px solid rgba(96, 48, 96, 0.8);
+	border-bottom: 2px solid rgba(255, 200, 255, 0.5);
+	border-radius: 30px;
+	color: white;
+	font-weight: bold;
+	display: block;
+	padding: 6px 15px;
+	margin-right: 330px;
+	margin-left: auto;
+	margin-top: 20px;
+	font-size: 20px;
+	text-shadow: 0 2px rgb(96 48 96 / 80%), 0 -1px rgb(255 200 255 / 50%);
+}
+#mapping td {
+	padding: 5px 23px;
+	display: table-cell;
+}
+#controls .bigbutton, #mapping td {
+	font-size: 30px;
+	padding: 8px 25px;
+} */
+
+#preload,
+#ingame {
+	position: absolute;
+	left: 0;
+	top: 0;
+	margin-top: 0 !important;
+}
+
 #screen {
 	margin-top: 85px;
-	margin-bottom: 150px;
+	margin-bottom: 18px;
 }
 
 #screen[width="240"] {
-	margin-top: 42.5px;
+	margin-top: 0;
 	margin-bottom: -363px; /* Take up no height */
 	image-rendering: -webkit-optimize-contrast;
 	image-rendering: -moz-crisp-edges;
 	image-rendering: -o-crisp-edges;
 	zoom: 2;
 	-o-transform: scale(2);
-}
-
-#controls::before {
-	content: "";
-	display: block;
-	height: 30px;
-	width: 647px;
-	border-radius: 5px / 15px;
-	border: 1px solid rgba(0, 0, 0, 0.4);
-	border-width: 0 1px;
-	margin: 0 -5px 20px;
-	background: -webkit-linear-gradient(top, #8769A0, #9578B9 15%, #6A4883 50%, #433061);
-	background: -moz-linear-gradient(top, #8769A0, #9578B9 15%, #6A4883 50%, #433061);
-	box-shadow: 0 5px 4px -3px rgba(0, 0, 0, 0.6);
-	position: absolute;
-}
-
-#controls {
-	border-radius: 20px;
-	border: 1px solid rgba(0, 0, 0, 0.4);
-	border-top: none;
-	box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.9), 0 -40px 2px -1px #433061 inset;
-	width: 640px;
-	margin: auto;
-	height: 200px;
-	overflow: hidden;
-	background-color: #765490;
 }
 
 #controls > div {

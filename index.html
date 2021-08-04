@@ -110,8 +110,8 @@ function run(file) {
 	var load = document.getElementById('select');
 	load.textContent = 'Loading...';
 	load.removeAttribute('onclick');
-	var pause = document.getElementById('pause');
-	pause.textContent = "PAUSE";
+	// var pause = document.getElementById('pause');
+	// pause.textContent = "PAUSE";
 	gba.loadRomFromFile(file, function(result) {
 		if (result) {
 			for (var i = 0; i < runCommands.length; ++i) {
@@ -290,30 +290,41 @@ document.addEventListener('webkitfullscreenchange', function() {
 	<div id="preload">
 		<button class="bigbutton" id="select" onclick="document.getElementById('loader').click()">SELECT</button>
 		<input id="loader" type="file" accept=".gba" onchange="run(this.files[0]);">
-		<button onclick="document.getElementById('saveloader').click()">Upload Savegame</button>
-		<input id="saveloader" type="file" onchange="uploadSavedataPending(this.files[0]);">
+		<!-- <button onclick="document.getElementById('saveloader').click()">Upload Savegame</button>
+		<input id="saveloader" type="file" onchange="uploadSavedataPending(this.files[0]);"> -->
 	</div>
 	<div id="ingame" class="hidden">
-		<button id="pause" class="bigbutton" onclick="togglePause()">PAUSE</button>
+		<!-- <button id="pause" class="bigbutton" onclick="togglePause()">PAUSE</button> -->
 		<button class="bigbutton" onclick="reset()">RESET</button>
-		<button onclick="gba.downloadSavedata()">Download Savegame</button>
-		<button onclick="screenshot()">Screenshot</button>
-		<label id="pixelated">
-			<input type="checkbox" onchange="setPixelated(this.checked)">
-			<p>Pixelated</p>
-		</label>
-		<div id="sound">
-			<input type="checkbox" checked onchange="gba.audio.masterEnable = this.checked">
-			<p>Sound</p>
-			<input type="range" min="0" max="1" value="1" step="any" onchange="setVolume(this.value)" oninput="setVolume(this.value)">
-		</div>
-		<p id="openDebug" onclick="enableDebug()">Debugger</p>
+		<!-- <button onclick="gba.downloadSavedata()">Download Savegame</button> -->
 	</div>
+	<!-- <p style="text-align: center;text-shadow: 1px #f4f6f8;color: #f4f6f8;">DPad: Arrow keys, Start: Enter, Select: Tab, L: A, R: S, A: Z, B: X </p> -->
+	<table id="mapping">
+		<tbody><tr>
+			<td>A</td>
+			<td>Z</td>
+		</tr>
+		<tr>
+			<td>B</td>
+			<td>X</td>
+		</tr>
+		<tr>
+			<td>L</td>
+			<td>A</td>
+		</tr>
+		<tr>
+			<td>R</td>
+			<td>S</td>
+		</tr>
+		<tr>
+			<td>Start</td>
+			<td>Enter</td>
+		</tr>
+		<tr>
+			<td>Select</td>
+			<td>\</td>
+		</tr>
+	</tbody></table>
 </section>
-<ul id="links">
-	<li><a href="http://github.com/endrift/gbajs/">Fork me on GitHub!</a></li>
-	<li><a href="https://github.com/endrift/gbajs/wiki/Compatibility-List">Compatibility list</a></li>
-</ul>
-<footer>© 2012 – 2013 <a href="http://endrift.com/">Jeffrey Pfau</a></footer>
 </body>
 </html>
