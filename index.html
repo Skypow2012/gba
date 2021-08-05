@@ -73,6 +73,15 @@ window.onload = function() {
 		var dead = document.getElementById('controls');
 		dead.parentElement.removeChild(dead);
 	}
+	
+	// 支持拖拽导入
+	document.body.addEventListener("dragover", function (ev) {
+		ev.preventDefault();
+	});
+	document.body.ondrop = function (ev) {
+		ev.preventDefault();
+		run(ev.dataTransfer.files[0])
+	}
 }
 
 function fadeOut(id, nextId, kill) {
