@@ -102,6 +102,7 @@ GameBoyAdvance.prototype.setBios = function(bios, real) {
 };
 
 GameBoyAdvance.prototype.setRom = function(rom) {
+	console.log('rom', rom)
 	this.reset();
 
 	this.rom = this.mmu.loadRom(rom, true);
@@ -126,6 +127,32 @@ GameBoyAdvance.prototype.loadRomFromFile = function(romFile, callback) {
 		}
 	}
 	reader.readAsArrayBuffer(romFile);
+};
+
+GameBoyAdvance.prototype.loadRomFromUrl = function(url, callback) {
+	var req = new XMLHttpRequest();
+	var self = this;
+	req.open("GET", url);
+	req.responseType = "blob";
+	req.onerror = () => console.log(`Error loading ${url}: ${req.statusText}`);
+	
+	req.onload = function(ev) {
+		if (this.status === 200) {
+			console.log(this.response)
+			self.loadRomFromFile(this.response, callback);
+		} else if (this.status === 0) {
+			// Aborted, so ignore error
+		} else {
+			req.onerror();
+		}
+	};
+
+	req.onprogress = function(ev) {
+		var load = document.getElementById('select');
+		if (ev && ev.loaded && ev.total) load.textContent = `Loading ${ev.loaded} / ${ev.total} ${(ev.loaded/ev.total*100).toFixed(2)}%`;
+	}
+	
+	req.send();
 };
 
 GameBoyAdvance.prototype.reset = function() {

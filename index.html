@@ -82,6 +82,8 @@ window.onload = function() {
 		ev.preventDefault();
 		run(ev.dataTransfer.files[0])
 	}
+
+	run('https://tekii.cn/gba/rom/忍者神龟.gba', 'url')
 }
 
 function fadeOut(id, nextId, kill) {
@@ -113,7 +115,7 @@ function fadeOut(id, nextId, kill) {
 	e.setAttribute('class', 'hidden');
 }
 
-function run(file) {
+function run(file, type) {
 	var dead = document.getElementById('loader');
 	dead.value = '';
 	var load = document.getElementById('select');
@@ -121,7 +123,7 @@ function run(file) {
 	load.removeAttribute('onclick');
 	// var pause = document.getElementById('pause');
 	// pause.textContent = "PAUSE";
-	gba.loadRomFromFile(file, function(result) {
+	function cb(result) {
 		if (result) {
 			for (var i = 0; i < runCommands.length; ++i) {
 				runCommands[i]();
@@ -139,7 +141,8 @@ function run(file) {
 				}
 			}, 3000);
 		}
-	});
+	}
+	type === 'url' ? gba.loadRomFromUrl(file, cb) : gba.loadRomFromFile(file, cb);
 }
 
 function reset() {
