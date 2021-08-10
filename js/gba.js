@@ -194,6 +194,10 @@ GameBoyAdvance.prototype.pause = function() {
 };
 
 GameBoyAdvance.prototype.advanceFrame = function() {
+	if (window.isSpeedUp) {
+		this.step();
+		this.step();
+	}
 	this.step();
 	if (this.seenSave) {
 		if (!this.mmu.saveNeedsFlush()) {

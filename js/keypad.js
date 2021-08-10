@@ -9,6 +9,7 @@ function GameBoyAdvanceKeypad() {
 	this.KEYCODE_B = 88;
 	this.KEYCODE_L = 65;
 	this.KEYCODE_R = 83;
+	this.SPEED_UP = 32;
 
 	this.GAMEPAD_LEFT = 14;
 	this.GAMEPAD_UP = 12;
@@ -72,6 +73,13 @@ GameBoyAdvanceKeypad.prototype.keyboardHandler = function(e) {
 	case this.KEYCODE_LEFT:
 		toggle = this.LEFT;
 		break;
+	case this.SPEED_UP:
+		// 空格加速
+		console.log(e.keyCode)
+		if (e.keyCode == 32) {
+			window.isSpeedUp = e.type == "keydown"
+		}
+		return;
 	default:
 		return;
 	}
