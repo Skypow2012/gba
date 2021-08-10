@@ -116,6 +116,8 @@ function fadeOut(id, nextId, kill) {
 }
 
 function run(file, type) {
+	gba.pause();
+	gba.reset(); // 重置后导入，防止速度被加快
 	var dead = document.getElementById('loader');
 	dead.value = '';
 	var load = document.getElementById('select');
