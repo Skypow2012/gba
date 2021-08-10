@@ -215,3 +215,23 @@ ul#links li:not(:first-child)::before {
 	content: "•";
 	margin: 0 0.5em;
 }
+
+.gamelist {
+	position: absolute;
+	left: 0;
+	top: 40px;
+	width: 150px;
+	text-align: left;
+}
+.bigbutton {
+	min-width: 110px;
+}
+.gamelist .bigbutton {
+	border-radius: 8px;
+	border: 0;
+	margin-bottom: 4px;
+}
+.gamelist .bigbutton:hover {
+	 cursor: pointer;
+	 background-color: #433061;
+}

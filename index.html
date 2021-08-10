@@ -83,7 +83,8 @@ window.onload = function() {
 		run(ev.dataTransfer.files[0])
 	}
 
-	run('https://tekii.cn/gba/rom/忍者神龟.gba', 'url')
+	// run('https://tekii.cn/gba/rom/忍者神龟.gba', 'url')
+	run('./rom/忍者神龟.gba', 'url')
 }
 
 function fadeOut(id, nextId, kill) {
@@ -300,6 +301,11 @@ document.addEventListener('webkitfullscreenchange', function() {
 </head>
 <body>
 <canvas id="screen" width="480" height="320"></canvas>
+<div class="gamelist">
+	<button class="bigbutton" onclick="run('./rom/忍者神龟.gba', 'url')">忍者神龟</button>
+	<button class="bigbutton" onclick="run('./rom/龙珠大冒险.gba', 'url')">龙珠大冒险</button>
+	<button class="bigbutton" onclick="run('./rom/口袋妖怪_红宝石.gba', 'url')">红宝石</button>
+</div>
 <section id="controls">
 	<div id="preload">
 		<button class="bigbutton" id="select" onclick="document.getElementById('loader').click()">SELECT</button>
