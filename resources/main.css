@@ -221,6 +221,7 @@ ul#links li:not(:first-child)::before {
 	left: 0;
 	top: 40px;
 	width: 150px;
+	height: 90%;
 	text-align: left;
 }
 .bigbutton {
@@ -234,4 +235,11 @@ ul#links li:not(:first-child)::before {
 .gamelist .bigbutton:hover {
 	 cursor: pointer;
 	 background-color: #433061;
+}
+.gamelist #load {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	/* word-break: keep-all; */
+	white-space: nowrap;
 }

@@ -83,8 +83,8 @@ window.onload = function() {
 		run(ev.dataTransfer.files[0])
 	}
 
-	// run('https://tekii.cn/gba/rom/忍者神龟.gba', 'url')
-	run('./rom/忍者神龟.gba', 'url')
+	run('https://tekii.cn/gba/rom/忍者神龟.gba', 'url')
+	// run('./rom/忍者神龟.gba', 'url')
 }
 
 function fadeOut(id, nextId, kill) {
@@ -117,6 +117,7 @@ function fadeOut(id, nextId, kill) {
 }
 
 function run(file, type) {
+	console.log('type', type, file)
 	gba.pause();
 	gba.reset(); // 重置后导入，防止速度被加快
 	var dead = document.getElementById('loader');
@@ -297,14 +298,19 @@ document.addEventListener('webkitfullscreenchange', function() {
 		canvas.removeAttribute('style');
 	}
 }, false);
+
+function go(url) {
+	run(url, 'url');
+}
 </script>
 </head>
 <body>
 <canvas id="screen" width="480" height="320"></canvas>
 <div class="gamelist">
-	<button class="bigbutton" onclick="run('./rom/忍者神龟.gba', 'url')">忍者神龟</button>
-	<button class="bigbutton" onclick="run('./rom/龙珠大冒险.gba', 'url')">龙珠大冒险</button>
-	<button class="bigbutton" onclick="run('./rom/口袋妖怪_红宝石.gba', 'url')">红宝石</button>
+	<button class="bigbutton" onclick="go('https://tekii.cn/gba/rom/忍者神龟.gba')">忍者神龟</button>
+	<button class="bigbutton" onclick="go('https://tekii.cn/gba/rom/龙珠大冒险.gba')">龙珠大冒险</button>
+	<button class="bigbutton" onclick="go('https://tekii.cn/gba/rom/口袋妖怪_红宝石.gba')">红宝石</button>
+	<div id="load"></div>
 </div>
 <section id="controls">
 	<div id="preload">
@@ -315,7 +321,7 @@ document.addEventListener('webkitfullscreenchange', function() {
 	</div>
 	<div id="ingame" class="hidden">
 		<!-- <button id="pause" class="bigbutton" onclick="togglePause()">PAUSE</button> -->
-		<button class="bigbutton" onclick="reset()">RESET</button>
+		<button class="bigbutton" id="reset" onclick="reset()">RESET</button>
 		<!-- <button onclick="gba.downloadSavedata()">Download Savegame</button> -->
 	</div>
 	<!-- <p style="text-align: center;text-shadow: 1px #f4f6f8;color: #f4f6f8;">DPad: Arrow keys, Start: Enter, Select: Tab, L: A, R: S, A: Z, B: X </p> -->

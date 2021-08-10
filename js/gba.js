@@ -130,16 +130,26 @@ GameBoyAdvance.prototype.loadRomFromFile = function(romFile, callback) {
 };
 
 GameBoyAdvance.prototype.loadRomFromUrl = function(url, callback) {
-	var req = new XMLHttpRequest();
 	var self = this;
+	if (window.isLoading) return;
+	if (window[url]) return self.loadRomFromFile(window[url], callback);
+	window.isLoading = true;
+	var req = new XMLHttpRequest();
 	req.open("GET", url);
 	req.responseType = "blob";
-	req.onerror = () => console.log(`Error loading ${url}: ${req.statusText}`);
+	req.onerror = () => {
+		console.log(`Error loading ${url}: ${req.statusText}`);
+		document.getElementById('load').textContent = '';
+		window.isLoading = false;
+	}
 	
 	req.onload = function(ev) {
+		window.isLoading = false;
+		document.getElementById('load').textContent = '';
 		if (this.status === 200) {
 			console.log(this.response)
 			self.loadRomFromFile(this.response, callback);
+			window[url] = this.response; // 缓存
 		} else if (this.status === 0) {
 			// Aborted, so ignore error
 		} else {
@@ -148,7 +158,7 @@ GameBoyAdvance.prototype.loadRomFromUrl = function(url, callback) {
 	};
 
 	req.onprogress = function(ev) {
-		var load = document.getElementById('select');
+		var load = document.getElementById('load');
 		if (ev && ev.loaded && ev.total) load.textContent = `Loading ${ev.loaded} / ${ev.total} ${(ev.loaded/ev.total*100).toFixed(2)}%`;
 	}
 	
