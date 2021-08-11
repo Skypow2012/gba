@@ -72,11 +72,11 @@ button {
 }
 
 #screen[width="240"] {
-	margin-top: 0;
-	margin-bottom: -363px; /* Take up no height */
-	image-rendering: -webkit-optimize-contrast;
+	margin-top: 42.5px;
+	/* image-rendering: -webkit-optimize-contrast;
 	image-rendering: -moz-crisp-edges;
-	image-rendering: -o-crisp-edges;
+	image-rendering: -o-crisp-edges; */
+	image-rendering: pixelated;
 	zoom: 2;
 	-o-transform: scale(2);
 }
