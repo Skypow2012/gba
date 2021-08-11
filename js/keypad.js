@@ -41,44 +41,48 @@ function GameBoyAdvanceKeypad() {
 };
 
 GameBoyAdvanceKeypad.prototype.keyboardHandler = function(e) {
+	console.log(e.key, e.keyCode)
+	if (window.ctlIdx !== undefined) {
+		ctlTars[window.ctlIdx] = `${e.key}|${e.keyCode}`;
+		localStorage.ctlTars = JSON.stringify(ctlTars)
+		renderCtlList()
+		return;
+	}
 	var toggle = 0;
-	switch (e.keyCode) {
-	case this.KEYCODE_START:
+	switch (e.keyCode.toString()) {
+	case ctlTars[0].split('|')[1]:
 		toggle = this.START;
 		break;
-	case this.KEYCODE_SELECT:
+	case ctlTars[1].split('|')[1]:
 		toggle = this.SELECT;
 		break;
-	case this.KEYCODE_A:
+	case ctlTars[2].split('|')[1]:
 		toggle = this.A;
 		break;
-	case this.KEYCODE_B:
+	case ctlTars[3].split('|')[1]:
 		toggle = this.B;
 		break;
-	case this.KEYCODE_L:
+	case ctlTars[4].split('|')[1]:
 		toggle = this.L;
 		break;
-	case this.KEYCODE_R:
+	case ctlTars[5].split('|')[1]:
 		toggle = this.R;
 		break;
-	case this.KEYCODE_UP:
+	case ctlTars[6].split('|')[1]:
 		toggle = this.UP;
 		break;
-	case this.KEYCODE_RIGHT:
+	case ctlTars[7].split('|')[1]:
 		toggle = this.RIGHT;
 		break;
-	case this.KEYCODE_DOWN:
+	case ctlTars[8].split('|')[1]:
 		toggle = this.DOWN;
 		break;
-	case this.KEYCODE_LEFT:
+	case ctlTars[9].split('|')[1]:
 		toggle = this.LEFT;
 		break;
-	case this.SPEED_UP:
-		// 空格加速
-		console.log(e.keyCode)
-		if (e.keyCode == 32) {
-			window.isSpeedUp = e.type == "keydown"
-		}
+	case ctlTars[10].split('|')[1]:
+		// 加速
+		window.isSpeedUp = e.type == "keydown"
 		return;
 	default:
 		return;
@@ -175,3 +179,5 @@ GameBoyAdvanceKeypad.prototype.registerHandlers = function() {
 	window.addEventListener("mozgamepaddisconnected", this.gamepadDisconnectHandler.bind(this), true);
 	window.addEventListener("webkitgamepaddisconnected", this.gamepadDisconnectHandler.bind(this), true);
 };
+
+window.GameBoyAdvanceKeypad = GameBoyAdvanceKeypad;

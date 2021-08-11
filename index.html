@@ -19,6 +19,7 @@
 <script src="js/savedata.js"></script>
 <script src="js/gpio.js"></script>
 <script src="js/gba.js"></script>
+<script src="js/ctl.js"></script>
 <script src="resources/xhr.js"></script>
 
 <script>
@@ -85,6 +86,8 @@ window.onload = function() {
 
 	run('https://tekii.cn/gba/rom/忍者神龟.gba', 'url')
 	// run('./rom/忍者神龟.gba', 'url')
+
+	renderCtlList()
 }
 
 function fadeOut(id, nextId, kill) {
@@ -353,8 +356,8 @@ function go(url) {
 		<tr>
 			<td>加速</td>
 			<td>Space</td>
-		</tr>
-	</tbody></table>
+		</tr></tbody>
+	</table>
 </section>
 </body>
 </html>

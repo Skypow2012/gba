@@ -21,6 +21,14 @@ button {
 	text-align: center;
 	border-spacing: 1px 5px;
 }
+#mapping .ctlSet {
+	box-sizing: border-box;
+	border: 1px solid #fff0;
+}
+#mapping .ctlSet:hover {
+	border: 1px solid #fff;
+	cursor: pointer;
+}
 
 /* #mapping td:first-child {
 	border-top-right-radius: 0;
