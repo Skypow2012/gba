@@ -118,6 +118,7 @@ function fadeOut(id, nextId, kill) {
 	e.addEventListener('oTransitionEnd', removeSelf, false);
 	e.addEventListener('transitionend', removeSelf, false);
 	e.setAttribute('class', 'hidden');
+	e2.removeAttribute('class');
 }
 
 function run(file, type) {
@@ -127,7 +128,7 @@ function run(file, type) {
 	var dead = document.getElementById('loader');
 	dead.value = '';
 	var load = document.getElementById('select');
-	load.textContent = 'Loading...';
+	load.textContent = '加载中...';
 	load.removeAttribute('onclick');
 	// var pause = document.getElementById('pause');
 	// pause.textContent = "PAUSE";
@@ -143,7 +144,7 @@ function run(file, type) {
 		} else {
 			load.textContent = 'FAILED';
 			setTimeout(function() {
-				load.textContent = 'SELECT';
+				load.textContent = '选择';
 				load.onclick = function() {
 					document.getElementById('loader').click();
 				}
@@ -157,7 +158,7 @@ function reset() {
 	gba.pause();
 	gba.reset();
 	var load = document.getElementById('select');
-	load.textContent = 'SELECT';
+	load.textContent = '选择';
 	var crash = document.getElementById('crash');
 	if (crash) {
 		var context = gba.targetCanvas.getContext('2d');
@@ -176,7 +177,9 @@ function reset() {
 }
 
 function uploadSavedataPending(file) {
-	runCommands.push(function() { gba.loadSavedataFromFile(file) });
+	toast(`已加载【${file.name}】，再加载与之对应的gba文件即可读取记录`);
+	console.log('%cindex.html line:181 file.name', 'color: #007acc;', file.name);
+	runCommands.push(function() { gba.loadSavedataFromFile(file, {isText: true}) });
 }
 
 function togglePause() {
@@ -311,23 +314,23 @@ function go(url) {
 <body>
 <canvas id="screen" width="240" height="160"></canvas>
 <div class="gamelist">
+	<div id="preload">
+		<button class="bigbutton" id="select" onclick="document.getElementById('loader').click()">选择</button>
+		<input id="loader" type="file" accept=".gba" onchange="run(this.files[0]);">
+		<button class="bigbutton" onclick="document.getElementById('saveloader').click()" id="uploadBtn">上传记录</button>
+		<input id="saveloader" type="file" onchange="uploadSavedataPending(this.files[0]);">
+	</div>
+	<div id="ingame" class="hidden">
+		<!-- <button id="pause" class="bigbutton" onclick="togglePause()">PAUSE</button> -->
+		<button class="bigbutton" id="reset" onclick="reset()">重置</button>
+		<button class="bigbutton" onclick="gba.downloadSavedata()" id="saveBtn">下载记录</button>
+	</div>
 	<button class="bigbutton" onclick="go('https://tekii.cn/gba/rom/忍者神龟.gba')">忍者神龟</button>
 	<button class="bigbutton" onclick="go('https://tekii.cn/gba/rom/龙珠大冒险.gba')">龙珠大冒险</button>
 	<button class="bigbutton" onclick="go('https://tekii.cn/gba/rom/口袋妖怪_红宝石.gba')">红宝石</button>
 	<div id="load"></div>
 </div>
 <section id="controls">
-	<div id="preload">
-		<button class="bigbutton" id="select" onclick="document.getElementById('loader').click()">SELECT</button>
-		<input id="loader" type="file" accept=".gba" onchange="run(this.files[0]);">
-		<!-- <button onclick="document.getElementById('saveloader').click()">Upload Savegame</button>
-		<input id="saveloader" type="file" onchange="uploadSavedataPending(this.files[0]);"> -->
-	</div>
-	<div id="ingame" class="hidden">
-		<!-- <button id="pause" class="bigbutton" onclick="togglePause()">PAUSE</button> -->
-		<button class="bigbutton" id="reset" onclick="reset()">RESET</button>
-		<!-- <button onclick="gba.downloadSavedata()">Download Savegame</button> -->
-	</div>
 	<!-- <p style="text-align: center;text-shadow: 1px #f4f6f8;color: #f4f6f8;">DPad: Arrow keys, Start: Enter, Select: Tab, L: A, R: S, A: Z, B: X </p> -->
 	<table id="mapping">
 		<tbody><tr>

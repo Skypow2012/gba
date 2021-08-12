@@ -279,10 +279,12 @@ GameBoyAdvance.prototype.setSavedata = function(data) {
 	this.mmu.loadSavedata(data);
 };
 
-GameBoyAdvance.prototype.loadSavedataFromFile = function(saveFile) {
+GameBoyAdvance.prototype.loadSavedataFromFile = function(saveFile, config={}) {
 	var reader = new FileReader();
 	var self = this;
-	reader.onload = function(e) { self.setSavedata(e.target.result); }
+	reader.onload = function(e) {
+		self.setSavedata(e.target.result);
+	}
 	reader.readAsArrayBuffer(saveFile);
 };
 
@@ -344,18 +346,8 @@ GameBoyAdvance.prototype.downloadSavedata = function() {
 	}
 	var data = this.encodeBase64(sram.view);
 	window.open('data:application/octet-stream;base64,' + data, this.rom.code + '.sav');
-	console.log('data:application/octet-stream;base64,' + data);
-	utools.shellOpenExternal('data:application/octet-stream;base64,' + data)
-	return;
-	if (window.URL) {
-		var url = window.URL.createObjectURL(new Blob([sram.buffer], { type: 'application/octet-stream' }));
-		window.open(url);
-		utools.shellOpenExternal(url)
-	} else {
-		var data = this.encodeBase64(sram.view);
-		window.open('data:application/octet-stream;base64,' + data, this.rom.code + '.sav');
-		utools.shellOpenExternal(url)
-	}
+	window.fs.writeFileSync(`${utools.getPath('desktop')}/${this.rom.code + '.sav'}`, sram.view)
+	toast(`已存储【${this.rom.code + '.sav'}】到桌面，需提前在游戏内存档（存档默认放在本地缓存，所以这个记录只用于传递存档记录）。`, {t: 4000, isShowConfirmBtn: true});
 };
 
 

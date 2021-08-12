@@ -224,23 +224,29 @@ ul#links li:not(:first-child)::before {
 	margin: 0 0.5em;
 }
 
+#preload,
+#ingame {
+	top: -77px;
+}
 .gamelist {
 	position: absolute;
 	left: 0;
-	top: 40px;
+	top: 80px;
 	width: 150px;
-	height: 90%;
+	height: calc(90% - 80px);
 	text-align: left;
 }
 .bigbutton {
 	min-width: 110px;
 }
+#controls .bigbutton,
 .gamelist .bigbutton {
 	border-radius: 8px;
 	border: 0;
 	margin-bottom: 4px;
 }
-.gamelist .bigbutton:hover {
+.gamelist .bigbutton:hover,
+#controls button:hover {
 	 cursor: pointer;
 	 background-color: #433061;
 }
