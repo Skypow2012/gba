@@ -310,9 +310,31 @@ function go(url) {
 	run(url, 'url');
 }
 </script>
+<script>
+	window.isFullScreen = false;
+	window.onresize = function() {
+		if (window.isFullScreen) {
+			document.getElementById('screen').style.zoom = Math.min(window.innerWidth / 240, window.innerHeight / 160);
+			document.getElementById('screen').style.marginTop = 0;
+			document.body.style.background = `-webkit-linear-gradient(#765490 560px, #6A4883 620px, #433061 900px)`;
+		}
+	}
+	function changeScreen() {
+		window.isFullScreen = !window.isFullScreen;
+		if (window.isFullScreen) {
+			document.getElementById('screen').style.zoom = Math.min(window.innerWidth / 240, window.innerHeight / 160);
+			document.getElementById('screen').style.marginTop = 0;
+			document.body.style.background = `-webkit-linear-gradient(#765490 560px, #6A4883 620px, #433061 900px)`;
+		} else {
+			document.getElementById('screen').style.zoom = '';
+			document.getElementById('screen').style.marginTop = '';
+			document.body.style.background = '';
+		}
+	}
+</script>
 </head>
 <body>
-<canvas id="screen" width="240" height="160"></canvas>
+<canvas id="screen" width="240" height="160" ondblclick="changeScreen()"></canvas>
 <div class="gamelist">
 	<div id="preload">
 		<button class="bigbutton" id="select" onclick="document.getElementById('loader').click()">选择</button>
