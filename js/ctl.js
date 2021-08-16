@@ -20,19 +20,32 @@ const ctls = [
 	'加速',
 ]
 
-const ctlTars = localStorage.ctlTars ? JSON.parse(localStorage.ctlTars) : [
-	'Enter|13',
-	'\\|220',
-	'z|90',
-	'x|88',
-	'a|65',
-	's|83',
-	'ArrowUp|38',
-	'ArrowRight|39',
-	'ArrowDown|40',
-	'ArrowLeft|37',
-	'Space|32'
-]
+let ctlTars;
+if (window.utools) {
+	window.utools.onPluginReady(function() {
+		if (window.utools.db.get('ctlTars')) {
+			ctlTars = JSON.parse(window.utools.db.get('ctlTars').data);
+			renderCtlList()
+		}
+	})
+} else if (localStorage) {
+	if (localStorage.ctlTars) ctlTars = JSON.parse(localStorage.ctlTars)
+}
+if (!ctlTars) {
+	ctlTars = [
+		'Enter|13',
+		'\\|220',
+		'z|90',
+		'x|88',
+		'a|65',
+		's|83',
+		'ArrowUp|38',
+		'ArrowRight|39',
+		'ArrowDown|40',
+		'ArrowLeft|37',
+		'Space|32'
+	]
+}
 
 function startSetCtl(idx) {
 	window.ctlIdx = idx;
@@ -60,6 +73,6 @@ function renderCtlList() {
 		delete window.ctlIdx;
 	}
 	ctls.map((ctl, idx) => addCtl(ctl, idx, box))
-	ctlTars[999] = '双击'
-	addCtl('全屏', 999, box);
+	ctlTars[-1] = '双击'
+	addCtl('全屏', -1, box);
 }

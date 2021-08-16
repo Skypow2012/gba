@@ -44,7 +44,13 @@ GameBoyAdvanceKeypad.prototype.keyboardHandler = function(e) {
 	console.log(e.key, e.keyCode)
 	if (window.ctlIdx !== undefined) {
 		ctlTars[window.ctlIdx] = `${e.key}|${e.keyCode}`;
-		localStorage.ctlTars = JSON.stringify(ctlTars)
+		if (window.utools) {
+			let oldCtlTars = window.utools.db.get('ctlTars') || {_id: 'ctlTars'};
+			oldCtlTars.data = JSON.stringify(ctlTars);
+			window.utools.db.put(oldCtlTars);
+		} else {
+			localStorage.ctlTars = JSON.stringify(ctlTars)
+		}
 		renderCtlList()
 		return;
 	}
