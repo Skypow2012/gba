@@ -354,8 +354,15 @@ GameBoyAdvance.prototype.downloadSavedata = function() {
 GameBoyAdvance.prototype.storeSavedata = function() {
 	var sram = this.mmu.save;
 	try {
-		var storage = window.localStorage;
-		storage[this.SYS_ID + '.' + this.mmu.cart.code] = this.encodeBase64(sram.view);
+		var _id = this.SYS_ID + '.' + this.mmu.cart.code;
+		if (window.utools) {
+			var info = window.utools.db.get(_id) || {_id};
+			info.data = this.encodeBase64(sram.view);
+			window.utools.db.put(info);
+		} else {
+			var storage = window.localStorage;
+			storage[_id] = this.encodeBase64(sram.view);
+		}
 	} catch (e) {
 		this.WARN('Could not store savedata! ' + e);
 	}
@@ -363,8 +370,15 @@ GameBoyAdvance.prototype.storeSavedata = function() {
 
 GameBoyAdvance.prototype.retrieveSavedata = function() {
 	try {
-		var storage = window.localStorage;
-		var data = storage[this.SYS_ID + '.' + this.mmu.cart.code];
+		var data;
+		var _id = this.SYS_ID + '.' + this.mmu.cart.code;
+		if (window.utools) {
+			var info = window.utools.db.get(_id) || {_id};
+			data = info.data;
+		} else {
+			var storage = window.localStorage;
+			data = storage[_id];
+		}
 		if (data) {
 			this.decodeSavedata(data);
 			return true;
