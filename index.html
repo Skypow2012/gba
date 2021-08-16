@@ -337,19 +337,19 @@ function go(url) {
 <canvas id="screen" width="240" height="160" ondblclick="changeScreen()"></canvas>
 <div class="gamelist">
 	<div id="preload">
-		<button class="bigbutton" id="select" onclick="document.getElementById('loader').click()">选择</button>
+		<button class="bigbutton" tabindex="-1" id="select" onclick="this.blur();document.getElementById('loader').click();">选择</button>
 		<input id="loader" type="file" accept=".gba" onchange="run(this.files[0]);">
-		<button class="bigbutton" onclick="document.getElementById('saveloader').click()" id="uploadBtn">上传记录</button>
+		<button class="bigbutton" tabindex="-1" onclick="this.blur();document.getElementById('saveloader').click();" id="uploadBtn">上传记录</button>
 		<input id="saveloader" type="file" onchange="uploadSavedataPending(this.files[0]);">
 	</div>
 	<div id="ingame" class="hidden">
 		<!-- <button id="pause" class="bigbutton" onclick="togglePause()">PAUSE</button> -->
-		<button class="bigbutton" id="reset" onclick="reset()">重置</button>
-		<button class="bigbutton" onclick="gba.downloadSavedata()" id="saveBtn">下载记录</button>
+		<button class="bigbutton" tabindex="-1" id="reset" onclick="reset()">重置</button>
+		<button class="bigbutton" tabindex="-1" onclick="gba.downloadSavedata()" id="saveBtn">下载记录</button>
 	</div>
-	<button class="bigbutton" onclick="go('https://tekii.cn/gba/rom/忍者神龟.gba')">忍者神龟</button>
-	<button class="bigbutton" onclick="go('https://tekii.cn/gba/rom/龙珠大冒险.gba')">龙珠大冒险</button>
-	<button class="bigbutton" onclick="go('https://tekii.cn/gba/rom/口袋妖怪_红宝石.gba')">红宝石</button>
+	<div class="bigbutton" tabindex="-1" onclick="go('https://tekii.cn/gba/rom/忍者神龟.gba');this.blur()">忍者神龟</div>
+	<div class="bigbutton" tabindex="-1" onclick="go('https://tekii.cn/gba/rom/龙珠大冒险.gba');this.blur()">龙珠大冒险</div>
+	<div class="bigbutton" tabindex="-1" onclick="go('https://tekii.cn/gba/rom/口袋妖怪_红宝石.gba');this.blur()">红宝石</div>
 	<div id="load"></div>
 </div>
 <section id="controls">
