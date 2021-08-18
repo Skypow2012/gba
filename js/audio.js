@@ -13,7 +13,12 @@ function GameBoyAdvanceAudio() {
 		} else {
 			this.jsAudio = this.context.createJavaScriptNode(this.bufferSize);
 		}
-		this.jsAudio.onaudioprocess = function(e) { self.audioProcess(e) };
+		this.jsAudio.onaudioprocess = function(e) {
+			if (!window.isSoundOpen) {
+				return;
+			}
+			self.audioProcess(e)
+		};
 	} else {
 		this.context = null;
 	}

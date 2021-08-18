@@ -27,7 +27,11 @@
 var gba;
 var runCommands = [];
 var debug = null;
-
+window.isSoundOpen = true
+function changeSound(isOpen) {
+	window.isSoundOpen = isOpen;
+	document.getElementById('soundCtl').innerText = isOpen ? '静音' : '已静音';
+}
 try {
 	gba = new GameBoyAdvance();
 	gba.keypad.eatInput = true;
@@ -347,6 +351,7 @@ function go(url) {
 		<button class="bigbutton" tabindex="-1" id="reset" onclick="reset()">重置</button>
 		<button class="bigbutton" tabindex="-1" onclick="gba.downloadSavedata()" id="saveBtn">下载记录</button>
 	</div>
+	<div class="bigbutton" id="soundCtl" tabindex="-1" onclick="changeSound(!window.isSoundOpen)">忍者神龟</div>
 	<div class="bigbutton" tabindex="-1" onclick="go('https://tekii.cn/gba/rom/忍者神龟.gba');this.blur()">忍者神龟</div>
 	<div class="bigbutton" tabindex="-1" onclick="go('https://tekii.cn/gba/rom/龙珠大冒险.gba');this.blur()">龙珠大冒险</div>
 	<div class="bigbutton" tabindex="-1" onclick="go('https://tekii.cn/gba/rom/口袋妖怪_红宝石.gba');this.blur()">红宝石</div>
